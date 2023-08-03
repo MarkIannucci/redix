@@ -10,7 +10,7 @@ The first reconnection attempts happens after a backoff interval decided by the 
 
 The `:sync_connect` option passed to `Redix.start_link/2` decides whether Redix should initiate the TCP connection to the Redis server *before* or *after* `Redix.start_link/2` returns. This option also changes the behaviour of Redix when the TCP connection can't be initiated at all.
 
-When `:sync_connect` is `false`, then a failed attempt to initially connect to the Redis server is treated exactly as a disconnection: attempts to reconnect are made as described above. This behaviour should be used when Redix is not a vital part of your application: your application should be prepared to handle Redis being down (for example, using the non "bang" variants to issue commands to Redis and handling `{:error, _}` tuples).
+When `:sync_connect` is `false`, the default setting, then a failed attempt to initially connect to the Redis server is treated exactly as a disconnection: attempts to reconnect are made as described above. This behaviour should be used when Redix is not a vital part of your application: your application should be prepared to handle Redis being down (for example, using the non "bang" variants to issue commands to Redis and handling `{:error, _}` tuples).
 
 When `:sync_connect` is `true`, then a failed attempt to initiate the connection to Redis will cause the Redix process to fail and exit. This might be what you want if Redis is vital to your application.
 
